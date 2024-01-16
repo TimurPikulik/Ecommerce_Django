@@ -5,6 +5,14 @@
     <title>{{ title }}</title>
 </head>
 <body>
+
+    {% if is_auth %}
+    	<h1>AAAAAAAAAAAAAAAAAAA</h1>
+    {% else %}
+        <h1>GGGGGGGGGGGGGGGGGG</h1>
+    {% endif %}
     <h1>{{ content }}</h1>
+    <h1>{{ list.1 }}</h1>
+    <h1>{{ dict.sdsd }}</h1>
 </body>
 </html>

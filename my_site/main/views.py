@@ -8,6 +8,9 @@ def index(request):
     context = {
         "title": "Test page",
         "content": "Zdarova",
+        "list": ["dsfsdf", "sdfsdf",],
+        "dict": {"sdsd": 1, },
+        "is_auth": False
     }
 
     return render(request, "main/index.html", context=context)
