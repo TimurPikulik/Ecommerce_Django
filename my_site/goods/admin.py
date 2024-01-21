@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.html import format_html, mark_safe
+
 from .models import Category, Product
 
 
@@ -12,7 +14,8 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
-    list_display = ("name", "quantity", "price", "category",)
+    list_display = ("name", "image_preview", "quantity", "price", "discount", "category",)
+    readonly_fields = ["image_preview"]
 
 
 admin.site.site_header = "Панель администрирования"
