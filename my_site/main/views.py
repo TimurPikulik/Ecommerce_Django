@@ -6,7 +6,7 @@ from goods.models import Category
 # Create your views here.
 
 def index(request):
-    categories = Category.objects.all()
+
     context = {
         "title": "Деревяшечка - Главная",
         "content": "Магазин мебели \"Деревяшечка\"",
