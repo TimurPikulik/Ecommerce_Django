@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 
 from .models import Product
 from .utils import q_search
@@ -13,6 +13,8 @@ def catalog(request, category_slug=None):
 
     if category_slug == "all":
         product_list = Product.objects.all().order_by('name')
+    elif query == '':
+        return redirect("catalog:index", category_slug="all")
     elif query:
         product_list = q_search(query)
     else:

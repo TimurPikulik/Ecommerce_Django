@@ -20,7 +20,7 @@
             </button>
 
                 <form action="{% if request.GET.q %}
-                                {% url "catalog:search" %}
+                                {% url "catalog:search"%}
                               {% else %}
                                 {% url "catalog:index" slug %}
                               {% endif %}" method="GET" class="dropdown-menu bg-dark" data-bs-theme="dark">
@@ -59,6 +59,14 @@
                 <button type="submit" class="btn btn-primary mx-3 mt-3">Применить</button>
             </form>
         </div>
+
+    {% if request.GET.q %}
+        <h1 class="mt-4">Результаты поиска по запросу: "{{ request.GET.q }}"</h1>
+    {% if not goods %}
+        <h2 class="mt-4">Ничего не найдено</h2>
+    {% endif %}
+    {% endif %}
+
     {% for good in goods %}
         <div class="col-lg-4 col-md-6 p-4">
             <div class="card border-primary rounded custom-shadow">
@@ -69,9 +77,25 @@
                 {% endif %}
                 <div class="card-body">
                     <a href="{% url "catalog:product" good.slug %}">
-                        <p class="card-title">{{ good.name }}</p>
+                        <p class="card-title">
+                            {% autoescape off%}
+                                {% if good.nameline %}
+                                    {{ good.nameline }}
+                                {% else %}
+                                    {{ good.name }}
+                                {% endif %}
+                            {% endautoescape %}
+                        </p>
                     </a>
-                    <p class="card-text">{{ good.description|truncatechars:45 }}</p>
+                    <p class="card-text">
+                        {% autoescape off%}
+                                {% if good.descriptionline %}
+                                    {{ good.descriptionline|truncatechars:100 }}
+                                {% else %}
+                                    {{ good.description|truncatechars:45 }}
+                                {% endif %}
+                            {% endautoescape %}
+                        </p>
                     <p class="product_id">id: {{ good.get_id }}</p>
                     <div class="d-flex justify-content-between">
                         {% if good.discount %}
@@ -90,7 +114,7 @@
         </div>
     {% endfor %}
 
-    {% if goods.has_other_pages %}
+    {% if goods %}
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center my-4">
             <div class="custom-shadow d-flex">
