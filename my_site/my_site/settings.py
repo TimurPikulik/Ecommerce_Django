@@ -142,4 +142,6 @@ INTERNAL_IPS = [
 
 APPEND_SLASH = False
 
+AUTH_USER_MODEL = 'users.User'
+
 
