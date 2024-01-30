@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'main',
     'goods',
     'users',
+    'carts',
 
     "debug_toolbar",
 
@@ -113,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -143,5 +144,6 @@ INTERNAL_IPS = [
 APPEND_SLASH = False
 
 AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = '/user/login'
 
 
