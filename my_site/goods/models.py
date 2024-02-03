@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.html import format_html
 
 
@@ -52,3 +53,6 @@ class Product(models.Model):
         if self.discount:
             return round(self.price - (self.price * (self.discount / 100)),2)
         return self.price
+
+    def get_absolute_url(self):
+        return reverse("catalog:product", kwargs={"slug": self.slug})

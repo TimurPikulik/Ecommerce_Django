@@ -13,8 +13,20 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
-    list_display = ("name", "image_preview", "quantity", "price", "discount", "category",)
+    list_display = ["name", "image_preview", "quantity", "price", "discount", "category", ]
     readonly_fields = ["image_preview"]
+    list_editable = ["discount", ]
+    search_fields = ["name", "description", ]
+    fields = [
+        "name",
+        "description",
+        "category",
+        ("price", "discount",),
+        "quantity",
+        "image",
+        "image_preview",
+        "slug",
+    ]
 
 
 admin.site.site_header = "Панель администрирования"
