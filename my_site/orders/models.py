@@ -1,3 +1,4 @@
+from django.core.validators import MaxLengthValidator, MinLengthValidator
 from django.db import models
 
 from users.models import User
@@ -21,7 +22,8 @@ class Order(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, blank=True, null=True, verbose_name='Пользователь',
                              default=None)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
-    phone_number = models.CharField(max_length=20, verbose_name='Номер телефона')
+    phone_number = models.CharField(max_length=20, verbose_name='Номер телефона', validators=[MaxLengthValidator(15),
+                                                                                              MinLengthValidator(9),])
     requires_delivery = models.BooleanField(default=False, verbose_name='Требуется доставка')
     delivery_address = models.TextField(null=True, blank=True, verbose_name='Адрес доставки')
     payment_on_get = models.BooleanField(default=False, verbose_name='Оплата при получении')
@@ -35,6 +37,14 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Заказ № {self.pk} | Покупатель {self.user.first_name} {self.user.last_name}"
+
+    def total_price(self):
+        items = OrderItem.objects.filter(order__id=self.id)
+        if items:
+            return sum(item.price for item in items)
+        return 0
+
+    total_price.short_description = 'Сумма заказа'
 
 
 class OrderItem(models.Model):

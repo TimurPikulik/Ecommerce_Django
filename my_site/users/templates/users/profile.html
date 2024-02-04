@@ -69,6 +69,15 @@
                                                <div class="alert alert-danger alert-dismissible fade show">{{ form.email.errors }}</div>
                                            {% endif %}
                                 </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="id_phone_number" class="form-label">Номер телефона</label>
+                                    <input type="text" class="form-control" id="id_phone_number"
+                                           name="phone_number" placeholder="Введите ваш номер моб "
+                                           value="{{ form.phone_number.value }}" required>
+                                           {% if form.phone_number.errors %}
+                                               <div class="alert alert-danger alert-dismissible fade show">{{ form.email.errors }}</div>
+                                           {% endif %}
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-dark">Сохранить</button>
                         </form>
@@ -85,7 +94,7 @@
                             <!-- Закончилась разметка корзины -->
                         </div>
                         {% if carts %}
-                        <a class="btn btn-dark" href="../orders/create_order.html">
+                        <a class="btn btn-dark" href="{% url "order:create_order" %}">
                             Оформить заказ
                         </a>
                         {% endif %}

@@ -2,6 +2,10 @@
 {% load static %}
 {% load cart_tags %}
 
+{% block title %}
+	{{ title }}
+{% endblock %}
+
 {% block content %}
     <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
         <div class="container">
@@ -36,7 +40,7 @@
                                        name="last_name" required
                                        value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}">
                                         {% if form.last_name.errors %}
-                                        	<div class="alert alert-danger alert-dismissible fade show">{{ form.first_name.errors }}</div>
+                                        	<div class="alert alert-danger alert-dismissible fade show">{{ form.last_name.errors }}</div>
                                         {% endif %}
                             </div>
                             <div class="col-md-6 mb-3">
@@ -46,7 +50,7 @@
                                        value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
                                        required>
                                         {% if form.phone_number.errors %}
-                                        	<div class="alert alert-danger alert-dismissible fade show">{{ form.first_name.errors }}</div>
+                                        	<div class="alert alert-danger alert-dismissible fade show">{{ form.phone_number.errors }}</div>
                                         {% endif %}
                             </div>
                             <div class="col-md-12 mb-3">
@@ -70,7 +74,7 @@
                                           name="delivery_address" rows="2"
                                           value="{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"></textarea>
                                         {% if form.delivery_address.errors %}
-                                        	<div class="alert alert-danger alert-dismissible fade show">{{ form.first_name.errors }}</div>
+                                        	<div class="alert alert-danger alert-dismissible fade show">{{ form.delivery_address.errors }}</div>
                                         {% endif %}
                             </div>
                             <div class="col-md-12 mb-3">

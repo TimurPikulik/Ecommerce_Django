@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import User
 from carts.admin import CartTabularInline
+from orders.admin import OrderTabularInline
 
 
 # Register your models here.
@@ -10,4 +11,4 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ["username", "first_name", "last_name", ]
     search_fields = ["username", "first_name", "last_name", ]
 
-    inlines = [CartTabularInline,]
+    inlines = [CartTabularInline, OrderTabularInline]
