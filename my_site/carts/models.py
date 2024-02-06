@@ -16,6 +16,7 @@ class CartQuerySet(models.QuerySet):
             return sum(cart.quantity for cart in self)
         return 0
 
+
 class Cart(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Пользователь', blank=True, null=True)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE, verbose_name='Продукт')
@@ -27,6 +28,7 @@ class Cart(models.Model):
         db_table = "cart"
         verbose_name = 'Корзины'
         verbose_name_plural = 'Корзина'
+        ordering = ['id', ]
 
     objects = CartQuerySet().as_manager()
 
@@ -36,8 +38,5 @@ class Cart(models.Model):
 
         return f"Анонимная корзина | Товар {self.product.name} | Количество {self.quantity}"
 
-
     def products_price(self):
         return round(self.product.get_discount_price() * self.quantity, 2)
-
-
